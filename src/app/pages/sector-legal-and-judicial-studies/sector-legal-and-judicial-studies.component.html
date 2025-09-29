@@ -1,0 +1,17 @@
+<section class="rounded-lg bg-[#F2F2F4ff]">
+    <div class="border border-white p-2 rounded-lg w-full">
+        @if (dashboardService.legalAndJudicialStudiesSectorData()) {
+            <h2 class="text-primary text-3xl font-bold text-center mb-2">
+                {{ dashboardService.legalAndJudicialStudiesSectorData().Name }}
+            </h2>
+        }
+        <div class="grid md:grid-cols-4 gap-3">
+            <app-department-training-and-qualifications-continuous class="md:col-span-3"></app-department-training-and-qualifications-continuous>
+            <div class="flex flex-col">
+                <app-department-training-and-qualifications-preparatory></app-department-training-and-qualifications-preparatory>
+                <app-department-legal-awareness></app-department-legal-awareness>
+                <app-department-study-and-research></app-department-study-and-research>
+            </div>
+        </div>
+    </div>
+</section>

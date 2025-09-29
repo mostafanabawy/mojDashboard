@@ -1,0 +1,89 @@
+<div class="p-6 bg-white/15 rounded-lg w-full h-[600px]">
+
+    <!-- <div>
+        <form [formGroup]="timeForm" (ngSubmit)="onSubmit()" class="p-2">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="form-row flex flex-col">
+                    <label for="Month" class="mb-1 font-medium text-white">الشهر</label>
+                    <select id="Month" class="border p-2 rounded form-select border-gray-300" formControlName="Month">
+                        <option value="">-- اختر الشهر --</option>
+                        <option value="1">يناير</option>
+                        <option value="2">فبراير</option>
+                        <option value="3">مارس</option>
+                        <option value="4">أبريل</option>
+                        <option value="5">مايو</option>
+                        <option value="6">يونيو</option>
+                        <option value="7">يوليو</option>
+                        <option value="8">أغسطس</option>
+                        <option value="9">سبتمبر</option>
+                        <option value="10">أكتوبر</option>
+                        <option value="11">نوفمبر</option>
+                        <option value="12">ديسمبر</option>
+                    </select>
+                </div>
+
+                <div class="form-row flex flex-col">
+                    <label for="Year" class="mb-1 font-medium text-white">السنة</label>
+                    <select id="Year" class="border p-2 rounded form-select border-gray-300" formControlName="Year">
+                        <option value="">-- اختر السنة --</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-primary border border-white w-1/12">
+                عرض
+            </button>
+        </form>
+    </div> -->
+    <div class="swiper h-full" id="slider1">
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+                <div class="pt-3 px-10">
+                    <app-sector-real-estate-and-documnetation></app-sector-real-estate-and-documnetation>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="pt-3 px-10 flex justify-center">
+                    <app-sector-legal-affairs></app-sector-legal-affairs>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="pt-3 px-10">
+                    <app-sector-financial-affairs></app-sector-financial-affairs>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="pt-3 px-10 flex justify-center">
+                    <app-sector-legal-and-judicial-studies></app-sector-legal-and-judicial-studies>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="pt-3 px-10">
+                    <app-sector-supervision></app-sector-supervision>
+                </div>
+            </div>
+
+        </div>
+        <a href="javascript:;"
+            class="swiper-button-prev-ex1 absolute top-[44%] z-[999] grid -translate-y-1/2 place-content-center rounded-full border border-white p-1 text-white bg-primary transition hover:border-primary hover:bg-transparent hover:text-primary ltr:left-2 rtl:right-2"
+            aria-label="Previous button">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 rtl:rotate-180">
+                <path d="M15 5L9 12L15 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </a>
+        <a href="javascript:;" aria-label="Next button"
+            class="swiper-button-next-ex1 absolute top-[44%] z-[999] grid -translate-y-1/2 place-content-center rounded-full border border-white p-1 text-white bg-primary transition hover:border-primary hover:bg-transparent hover:text-primary ltr:right-2 rtl:left-2">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 ltr:rotate-180">
+                <path d="M15 5L9 12L15 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </a>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>

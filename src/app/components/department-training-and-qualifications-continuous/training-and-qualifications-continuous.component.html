@@ -1,0 +1,33 @@
+<div class="w-full text-center h-full flex flex-col justify-stretch items-stretch bg-[#E1E1E3] p-2 rounded-lg">
+    <h3 class="font-bold text-2xl rounded-lg p-2">
+        {{ "التدريب والتأهيل المستمر" }}
+    </h3>
+    <div class="flex flex-1">
+        <app-stats-block class="grid md:grid-cols-4 auto-cols-min items-stretch gap-6 justify-between" [statsBlocks]="[
+            {
+                title: 'الدورات التدريبية المستمرة حسب خطة التدريب',
+                span: '2',
+                blockSpan: '2',
+                stats: accordingToPlanGroup()
+            },
+            {
+                title: 'الدورات التدريبية المستمرة خارج خطة التدريب',
+                span: '2',
+                blockSpan: '2',
+                stats: outsidePlanGroup()
+            },
+            {
+                title: 'الدورات التدريبية الخاصة بالأحكام المنظمة لأعمال الوساطةالعقارية',
+                span: '2',
+                blockSpan: '2',
+                stats: organisedForRealEstateGroup()
+            },
+            {
+                title: 'الدورات التدريبية الخاصة بالأحكام المنظمة لأعمال الخبراء',
+                span: '2',
+                blockSpan: '2',
+                stats: organisedForExpertsGroup()
+            }
+        ]"></app-stats-block>
+    </div>
+</div>

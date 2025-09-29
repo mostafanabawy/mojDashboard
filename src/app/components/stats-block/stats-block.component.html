@@ -1,0 +1,36 @@
+<div *ngFor="let item of statsBlocks()" class="flex flex-col flex-wrap grow text-center" [ngClass]="{'flex-row' : item.span !== '1',
+    'md:col-span-1': item.blockSpan === '1',
+    'md:col-span-2': item.blockSpan === '2',
+    'md:col-span-3': item.blockSpan === '3',
+    'md:col-span-4': item.blockSpan === '4',
+    'md:col-span-5': item.blockSpan === '5',
+    'md:col-span-6': item.blockSpan === '6',
+    'md:col-span-7': item.blockSpan === '7',
+    'md:col-span-8': item.blockSpan === '8',
+    'md:col-span-9': item.blockSpan === '9',
+    'md:col-span-10': item.blockSpan === '10',
+    'md:col-span-11': item.blockSpan === '11',
+    'md:col-span-12': item.blockSpan === '12',
+}">
+    @if (!item.stats || item.stats.length === 0) {
+    <p class="m-3 font-bold">لا يوجد بيانات</p>
+    }@else {
+    @if (item.title) {
+    <h3 class="text-lg font-bold text-gray-700 mt-1 py-1 px-1 bg-white rounded-t-lg w-full">
+        {{ item.title }}
+    </h3>
+    }
+    @if (item.stats) {
+        <dl class="text-primary grid gap-2 w-full flex-1 items-stretch"
+            [ngClass]="{ 'md:grid-cols-1': item.span === '1','md:grid-cols-2': item.span === '2', 'md:grid-cols-3': item.span === '3', 'md:grid-cols-4': item.span === '4', 'md:grid-cols-5': item.span === '5', 'md:grid-cols-6': item.span === '6'}">
+            <div *ngFor="let stat of item.stats; let i = index; let last = last"
+                class="bg-white my-1 flex justify-center items-center gap-2 px-3 shadow-sm" 
+                [ngClass]="getCombinedClasses(stat, item, i, last)">
+    
+                <dd class="text-lg font-bold text-wrap pt-1">{{ stat.statValue }}</dd>
+                <dt class="text-wrap pb-1 text-gray-600 font-bold">{{ stat.statLabel }}</dt>
+            </div>
+        </dl>
+    }
+    }
+</div>

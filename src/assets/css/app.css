@@ -1,0 +1,32 @@
+@import 'tailwind.css';
+@import 'flatpickr/dist/flatpickr.min.css';
+/* @import 'swiper/swiper-bundle.min.css'; */
+@font-face {
+    font-family: 'lusail';
+    src: url('/assets/fonts/Lusail-Font/WOFF/Lusail-Light.woff2');
+    font-weight: 300;
+    font-style: normal
+}
+
+@font-face {
+    font-family: 'lusail';
+    src: url('/assets/fonts/Lusail-Font/WOFF/Lusail-Medium.woff2');
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face {
+    font-family: 'lusail';
+    src: url('/assets/fonts/Lusail-Font/WOFF/Lusail-Bold.woff2');
+    font-weight: 700;
+    font-style: normal
+}
+
+* {
+    font-family: 'lusail' !important;
+}
+
+.bh-pagination-number button {
+    border-radius: 0 !important;
+    border: none !important;
+}

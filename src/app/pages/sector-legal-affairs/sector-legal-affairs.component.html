@@ -1,0 +1,67 @@
+<section class="bg-[#F2F2F4ff]">
+    <div class="p-2 rounded-lg w-full">
+        @if (dashboardService.legalAffairsSectorData()) {
+            <h2 class="text-primary text-3xl font-bold text-center mb-2">
+                {{ dashboardService.legalAffairsSectorData().Name }}
+            </h2>
+        }
+        <div class="grid grid-cols-1 gap-2">
+            <app-stats-block [ngClass]="{ 'grid !grid-cols-3 gap-2': router.url === '/dashboard-slider'}" [statsBlocks]="[
+                {
+                    span: '1',
+                    flex: 'true',
+                    blockSpan: router.url === '/dashboard-slider'? '3' : '',
+                    stats: casesStat()
+                },
+                {
+                    span: '2',
+                    blockSpan: router.url === '/dashboard-slider'? '3' : '',
+                    stats: judgementsStat()
+                },
+                {
+                    span: '1',
+                    flex: 'true',
+                    blockSpan: router.url === '/dashboard-slider'? '3' : '',
+                    stats: contractsStat()
+                },
+                {
+                    span: '1',
+                    flex: 'true',
+                    blockSpan: router.url === '/dashboard-slider'? '1' : '',
+                    stats: agreementsStat()
+                },
+                {
+                    title: 'الترجمة والجريدة الرسمية',
+                    span: '5'  ,
+                    blockSpan: router.url === '/dashboard-slider'? '1' : '',
+                    stats: translationGroup()
+                },
+                {
+                    span: '1',
+                    flex: 'true',
+                    blockSpan: router.url === '/dashboard-slider'? '1' : '',
+                    stats: translationLast()
+                },
+                {
+                    title: 'إدارة الخبراء',
+                    span: '5',
+                    blockSpan: router.url === '/dashboard-slider'? '1' : '',
+                    stats: expertsDepartmentGroup()
+                },
+                {
+                    title: 'تصنيف الخبراء المقيدين وفقا لمجال الخبرة',
+                    span: '4',
+                    blockSpan: router.url === '/dashboard-slider'? '1' : '',
+                    stats: expertsClassificationGroup()
+
+                },
+                {
+                    title: 'إدارة المحاماة',
+                    span: '4',
+                    blockSpan: router.url === '/dashboard-slider'? '1' : '',
+                    stats: lawyerGroup()
+                }
+            ]"></app-stats-block>
+        </div>
+    </div>
+</section>

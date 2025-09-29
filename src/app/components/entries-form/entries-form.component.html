@@ -1,0 +1,78 @@
+@if ( dashboardService.realEstateSectorData() || dashboardService.formData() ) {
+<form *ngIf="entryForm" [formGroup]="entryForm" (ngSubmit)="onSubmit()"
+    class="p-6 space-y-6 bg-white shadow-rose-950 rounded-md text-right mt-2">
+
+    <h2 class="text-3xl font-bold mb-10 mt-6">إدخال بيانات الإدارة</h2>
+
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="form-row flex flex-col">
+            <label for="Month" class="mb-1 font-medium text-gray-600">الشهر</label>
+            <select id="Month" class="border p-2 rounded form-select border-gray-300" formControlName="Month">
+                <option value="">-- اختر الشهر --</option>
+                <option value="1">يناير</option>
+                <option value="2">فبراير</option>
+                <option value="3">مارس</option>
+                <option value="4">أبريل</option>
+                <option value="5">مايو</option>
+                <option value="6">يونيو</option>
+                <option value="7">يوليو</option>
+                <option value="8">أغسطس</option>
+                <option value="9">سبتمبر</option>
+                <option value="10">أكتوبر</option>
+                <option value="11">نوفمبر</option>
+                <option value="12">ديسمبر</option>
+            </select>
+        </div>
+
+        <div class="form-row flex flex-col">
+            <label for="Year" class="mb-1 font-medium text-gray-600">السنة</label>
+            <select id="Year" class="border p-2 rounded form-select border-gray-300" formControlName="Year">
+                <option value="">-- اختر السنة --</option>
+                <ng-container *ngFor="let item of getYearsOptions()">
+                    <option [value]="item">{{ item }}</option>
+                </ng-container>
+            </select>
+        </div>
+    </div>
+
+
+
+    <div *ngFor="let group of groupedEntries" class="grid md:grid-cols-2 gap-4">
+        <h3 class="text-lg font-semibold mb-4 md:col-span-2">{{ group.groupName }}</h3>
+        <div *ngFor="let control of group.controls; let last = last"
+            [ngClass]="{'md:col-span-2': group.controls.length % 2 === 1 && last}" class="p-4 rounded">
+            <div class="">
+                <div class="form-row flex flex-col">
+                    <label class="mb-1 text-gray-600">
+                        {{ control.get('Label')?.value }}
+                    </label>
+                    <input type="number" class="border p-2 rounded form-input border-gray-300"
+                        [formControl]="getValueControl(control, 'Value')" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="flex flex-wrap justify-start gap-4 mt-8">
+        <button type="submit" [disabled]="isDisabled()" (click)="setSaveType(store.user?.role == 'Manager'?  'تحت الإجراء': 
+            store.user?.role == 'Secretary'? 'لم يبدأ': ''
+        )" class="bg-primary  hover:bg-opacity-90 text-white font-semibold px-6 py-2 rounded">
+            الحفظ النهائي
+        </button>
+        @if (store.user?.role == 'Manager') {
+        <button type="submit" [disabled]="isDisabled()" (click)="setSaveType('لم يبدأ')"
+            class="bg-gray-600 hover:opacity-90 text-white font-semibold px-6 py-2 rounded">
+            حفظ كمسودة
+        </button>
+        }
+        @if (store.user?.role == 'Secretary') {
+        <button type="submit" [disabled]="isDisabled()" (click)="setSaveType('إرجاع')"
+            class="btn btn-sm bg-[#60583d] text-white transition-all shadow-lg hover:shadow-none text-nowrap">
+            إرجاع
+        </button>
+        }
+    </div>
+</form>
+}

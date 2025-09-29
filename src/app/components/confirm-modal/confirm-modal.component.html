@@ -1,0 +1,27 @@
+<div cdkTrapFocus [cdkTrapFocusAutoCapture]="true" class="reject-modal">
+    <!-- Modal -->
+    <ngx-custom-modal #modal15 class="modal-top z-[9999] large-modal" [closeOnOutsideClick]="false">
+        <ng-template #modalHeader>
+            <h2 class="text-3xl p-2 flex items-center">
+                رسالة تأكيد
+            </h2>
+        </ng-template>
+        <ng-template #modalBody>
+            <p class="text-lg font-bold">
+                <span>
+                    {{message()}}
+                </span>
+            </p>
+        </ng-template>
+        <ng-template #modalFooter>
+            <div class="flex justify-end gap-2">
+                <button class="btn btn-primary" (click)="onConfirm()">
+                    تأكيد
+                </button>
+                <button class="btn border border-gray-400 hover:bg-primary" (click)="onCancel()">
+                    إلغاء
+                </button>
+            </div>
+        </ng-template>
+    </ngx-custom-modal>
+</div>

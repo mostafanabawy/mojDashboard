@@ -1,0 +1,33 @@
+<div class="w-full text-center h-full flex flex-col justify-stretch items-stretch bg-[#E3E4DE] p-2 rounded-lg">
+    <h3 class="font-bold text-2xl rounded-lg p-2">
+        إدارة الشئون المالية والإدارية
+    </h3>
+    <app-stats-block class="grow grid md:grid-cols-5 gap-2" [statsBlocks]="[
+            {
+                title: 'إحصائات المشاريع الأقل من 200 ألف',
+                span: '2',
+                blockSpan: '2',
+                stats: projectsStatisticsGroupLess()
+            },
+            {
+                title: 'إحصائات المشاريع الأعلى من 200 ألف',
+                blockSpan: '3',
+                span: '5',
+                stats: projectsStatisticsGroupMore()
+            },
+        ]"></app-stats-block>
+    <app-stats-block class="grid md:grid-cols-4 gap-2" [statsBlocks]="[   
+             {
+                span: '1',
+                stats: profitsGroup()
+            },
+            {
+                title: 'موازنة العام',
+                span: '3',
+                blockSpan: '3',
+                stats: yearBudgetGroup()
+            }
+           
+        ]"></app-stats-block>
+
+</div>

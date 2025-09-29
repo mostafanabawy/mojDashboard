@@ -1,0 +1,17 @@
+<section class="rounded-lg bg-[#FBF9F7ff]">
+    <div class="border border-white p-2 rounded-lg w-full">
+        @if (dashboardService.realEstateSectorData()) {
+        <h2 class="text-primary text-3xl font-bold text-center mb-4">
+            {{ dashboardService.realEstateSectorData().Name}}
+        </h2>
+        <div class="grid md:grid-cols-6 gap-2">
+            <app-department-real-estate class="md:col-span-2"></app-department-real-estate>
+            <app-department-real-estate-brokerage class="md:col-span-3"></app-department-real-estate-brokerage>
+            <app-department-documentation></app-department-documentation>
+        </div>
+        }@else {
+            <p class="text-lg font-bold">Loading</p>
+        }
+        <!-- <app-sector-table></app-sector-table> -->
+    </div>
+</section>

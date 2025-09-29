@@ -1,0 +1,46 @@
+<div class="panel mt-6 pb-0">
+        <div class="mb-5 flex flex-col gap-5 md:flex-row md:items-center">
+            @if (store.user?.role != 'Manager') {
+                <h2 class="text-lg font-semibold dark:text-white-light">
+                    المهام تحت الإجراء
+                </h2>
+            }
+            <div class="ltr:ml-auto rtl:mr-auto">
+                <input [(ngModel)]="search5" type="text" class="form-input" placeholder="بحث" />
+            </div>
+        </div>
+
+        <div class="datatable">
+            <ng-datatable
+                [rows]="store.user?.role == 'Manager' ? data().result.items : data()"
+                [columns]="cols"
+                [search]="search5" [showPageSize]="false"
+                skin="bh-table-striped bh-table-hover bh-table-bordered bh-table-compact"
+                firstArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M13 19L7 12L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path opacity="0.5" d="M16.9998 19L10.9998 12L16.9998 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
+                lastArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M11 19L17 12L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path opacity="0.5" d="M6.99976 19L12.9998 12L6.99976 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg> '
+                previousArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M15 5L9 12L15 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
+                nextArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
+            >
+            <ng-template slot="action" let-value="data">
+                <div class="flex items-center justify-center gap-2">
+                    @if (store.user?.role == 'Manager') {
+                        <button (click)="view(value.taskID, value.year, value.month)" class="btn btn-sm border border-gray-400 hover:btn-primary">
+                            عرض
+                        </button>
+                    }@else {
+                        <button class="btn btn-sm btn-primary text-nowrap" (click)="approve(value.taskID)">
+                            الموافقة عليه
+                        </button>
+                        <button class="btn btn-sm bg-[#60583d] text-white transition-all shadow-lg hover:shadow-none text-nowrap" (click)="reject(value.taskID)">
+                            إرجاع
+                        </button>
+                        <button (click)="view(value.taskID, value.year, value.month)" class="btn btn-sm border border-gray-400 hover:btn-primary">
+                            عرض
+                        </button>
+                    }
+                </div>
+            </ng-template>
+            </ng-datatable>
+        </div>
+    </div>
+    <app-confirm-modal></app-confirm-modal>

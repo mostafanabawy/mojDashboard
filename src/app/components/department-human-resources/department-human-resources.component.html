@@ -1,0 +1,24 @@
+<div class="w-full text-center h-full flex flex-col justify-stretch items-stretch bg-[#E3E4DE] p-2 rounded-lg">
+    <h3 class="font-bold text-2xl rounded-lg p-2">
+        {{ "إدارة الموارد البشرية" }}
+    </h3>
+    <app-stats-block [statsBlocks]="[
+        {
+            title: 'موازنة العام',
+            span: '3',
+            stats: yearBudgetGroup()
+        },
+        {
+            title: 'عدد الموظفين',
+            span: '6',
+            stats: firstEmployeesGroup()
+        }
+    ]"></app-stats-block>
+    <app-stats-block [statsBlocks]="[
+        {
+            span: '5',
+            stats: secondEmployeesGroup()
+        }
+    ]"></app-stats-block>
+
+</div>

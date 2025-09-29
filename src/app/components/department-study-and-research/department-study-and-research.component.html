@@ -1,0 +1,11 @@
+<div class="w-full text-center h-full flex flex-col justify-stretch items-stretch bg-[#E1E1E3] p-2 rounded-lg">
+    <h3 class="font-bold text-2xl rounded-lg p-2">
+        {{ "الدراسات والبحوث"}}
+    </h3>
+    <app-stats-block [statsBlocks]="[
+        {
+            span: '1',
+            stats: studyAndResearchGroup()
+        }
+    ]"></app-stats-block>
+</div>

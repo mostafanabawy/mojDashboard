@@ -1,0 +1,19 @@
+<div class="w-full text-center flex flex-col h-full bg-[#EAEAEAff] rounded-lg p-2">
+    <h3 class="font-bold text-2xl rounded-lg mb-2">
+        {{ "إدارة التسجيل العقاري" }}
+    </h3>
+        <app-stats-block [statsBlocks]="[
+            {
+                'title': 'عمليات البيع و الشراء',
+                'span': '2',
+                'stats': buyAndSellGroup()
+            },
+            {
+                'title': 'عمليات الرهن',
+                'span': '2',
+                'stats': mortgageGroup()
+            }
+            ]" class="flex flex-col grow"></app-stats-block>
+
+
+</div>

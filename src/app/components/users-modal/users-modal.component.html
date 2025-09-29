@@ -1,0 +1,92 @@
+<div cdkTrapFocus [cdkTrapFocusAutoCapture]="true" class="reject-modal">
+    <!-- Modal -->
+    <ngx-custom-modal #modal11 class="modal-top z-[9999] large-modal" [closeOnOutsideClick]="false">
+        <ng-template #modalHeader>
+            <h2 class="text-3xl p-2 flex items-center">
+                @if (modalType() == 'add') {
+                اضافة مستخدم جديد
+                }@else {
+                تعديل مستخدم
+                }
+            </h2>
+        </ng-template>
+        <ng-template #modalBody>
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()"
+                class="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-md space-y-6">
+                <div>
+                    <label for="FullName" class="block font-semibold mb-1">
+                        الإسم كامل
+                    </label>
+                    <input type="text" id="FullName" formControlName="FullName"
+                        class="w-full p-2 border rounded-md form-input" />
+                </div>
+
+                <div>
+                    <label for="Email" class="block font-semibold mb-1">
+                        البريد الألكتروني
+                    </label>
+                    <input type="email" id="Email" formControlName="Email"
+                        class="w-full p-2 border rounded-md form-input" />
+                </div>
+                @if(modalType() == 'add'){
+                    <div>
+                        <label for="PasswordHash" class="block font-semibold mb-1">
+                            كلمة المرور
+                        </label>
+                        <input type="password" id="PasswordHash" formControlName="PasswordHash"
+                            class="w-full p-2 border rounded-md form-input"
+                            autocomplete="new-password" />
+                    </div>
+                }
+
+                <div>
+                    <label for="Role" class="block font-semibold mb-1">
+                        الصلاحية
+                    </label>
+                    <select id="Role" formControlName="Role"
+                        class="w-full p-2 border rounded-md form-select">
+                        <option value="Manager">Manager</option>
+                        <option value="Secretary">Secretary</option>
+                        <option value="Viewer">Viewer</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="Mobile" class="block font-semibold mb-1">
+                        رقم الهاتف
+                    </label>
+                    <input type="tel" id="Mobile" formControlName="Mobile"
+                        class="w-full p-2 border rounded-md form-input" />
+                </div>
+
+
+                <div>
+                    <label for="DepartmentName" class="block font-semibold mb-1">
+                        اسم القسم
+                    </label>
+                    <select type="text" id="DepartmentName" formControlName="DepartmentName"
+                        class="w-full p-2 border rounded-md form-select" >
+                    @for (item of departmentsOptions(); track $index) {
+                        <option [value]="item.Name+';'+item.OrgUnitID+';'+item.ParentID+';'+item.Level">
+                            {{item.Name}}
+                        </option>
+                    }
+                    </select>
+                    </div>
+
+                <button type="submit"
+                    class="btn btn-primary px-12 hover:bg-primary hover:text-white mx-auto">
+                    @if (modalType() == 'add') {
+                        تسجيل
+                    }@else {
+                        تعديل
+                    }
+                    
+                </button>
+            </form>
+
+
+
+        </ng-template>
+    </ngx-custom-modal>
+</div>

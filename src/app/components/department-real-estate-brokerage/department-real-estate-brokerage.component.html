@@ -1,0 +1,48 @@
+<div class="w-full text-center rounded-lg p-2 bg-[#EAEAEAff]" [ngClass]="{ '!bg-gray-100': store.user?.role == 'Manager'}">
+  <h3 class="font-bold text-2xl mb-2">
+    @if (store.user?.role == 'Manager') {
+      {{ store.user?.departmentName}}
+    }@else {
+      {{ "إدارة الوساطة العقارية"}}
+    }
+  </h3>
+  @if (store.user?.role == 'Manager') {
+  @if (realEstateBrokerageData()) {
+  <app-entries-form></app-entries-form>
+  }
+  }@else {
+
+  @if ((!brokerageLicenseGroup() && !brokerageGroup() && !managersGroup() && !representativesGroup()) || (brokerageLicenseGroup().length === 0 && brokerageGroup().length === 0 && managersGroup().length === 0 && representativesGroup().length === 0)) {
+  <p class="font-bold mt-3 text-lg">
+    لا يوجد بيانات
+  </p>
+  }@else {
+  <app-stats-block class="grid md:grid-cols-12 gap-2" [statsBlocks]="[
+  {
+    'title': 'إصدار ترخيص مزاولة أعمال الوساطة العقارية',
+    'span': '2',
+    'blockSpan': '6',
+    'stats': brokerageLicenseGroup()
+  },
+  {
+    'span': '3',
+    'blockSpan': '6',
+    'stats': brokerageGroup()
+  },
+  {
+    'title': 'المدراء المرخصين',
+    'span': '2',
+    'blockSpan': '6',
+    'stats': managersGroup()
+  },
+  {
+    'title': 'المناديب المرخصين',
+    'span': '2',
+    'blockSpan': '6',
+    'stats': representativesGroup()
+  }
+]"></app-stats-block>
+  }
+  }
+
+</div>

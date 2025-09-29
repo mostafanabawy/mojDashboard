@@ -1,0 +1,13 @@
+<section class="rounded-lg bg-[#F2F3EEff]">
+    <div class="border border-white p-2 rounded-lg w-full">
+        @if(dashboardService.financialAffairsSectorData()){
+            <h2 class="text-primary text-3xl font-bold text-center mb-2">
+                {{ dashboardService.financialAffairsSectorData().Name }}
+            </h2>
+        }
+        <div class="grid grid-cols-1 gap-y-4" [ngClass]="{ '!grid-cols-2 !gap-2': router.url === '/dashboard-slider'}">
+            <app-department-financial-administrative-affairs></app-department-financial-administrative-affairs>
+            <app-department-human-resources></app-department-human-resources>
+        </div>
+    </div>
+</section>
