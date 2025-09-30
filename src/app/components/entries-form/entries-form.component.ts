@@ -122,7 +122,7 @@ export class EntriesFormComponent {
         let yearControl = this.entryForm.get('Year')
         let previousEntry = res.items.find((item: any) => {
 
-          return item.Year == yearControl?.value && item.Month == value && item.OrgUnitID == this.store.user?.departmentId
+          return item.Year == yearControl?.value && item.Month == value && item.OrgUnitID == this.store.user?.departmentId && item.Status === 'تحت الإجراء'
         })
         if (previousEntry) {
           this.isDisabled.set(true);
