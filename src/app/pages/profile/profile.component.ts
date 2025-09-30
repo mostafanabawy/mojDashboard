@@ -18,14 +18,14 @@ export class ProfileComponent {
   isModal = signal(0);
   isModal2 = signal(0);
   cols = [
-    { field: 'DepartmentId', title: 'معرف الادارة' },
+    { field: 'DepartmentId', title: 'معرف الادارة', filter: false },
     { field: 'DepartmentName', title: 'اسم الادارة' },
-    { field: 'Email', title: 'البريد الالكتروني' },
-    { field: 'FullName', title: 'الاسم كامل' },
-    { field: 'IsActive', title: 'الحالة' },
-    { field: 'Mobile', title: 'الجوال' },
-    { field: 'Role', title: 'الدور' },
-    { field: 'action', title: 'الإجراءات' }
+    { field: 'Email', title: 'البريد الالكتروني', filter: false },
+    { field: 'FullName', title: 'الاسم كامل', filter: false },
+    { field: 'IsActive', title: 'الحالة', filter: false },
+    { field: 'Mobile', title: 'الجوال', filter: false },
+    { field: 'Role', title: 'الدور', filter: false },
+    { field: 'action', title: 'الإجراءات', filter: false }
   ];
   totalRows = signal<any>(null);
   pageSize = signal<any>(null);

@@ -135,8 +135,8 @@ export class SectorTableComponent {
             });
         }) */
     }
-    view(taskID: number, Year: number, Month: number) {
-        this.secretaryService.viewTasksApi({ taskID, OrgUnitID: 12, Year, Month }).subscribe((res: any) => {
+    view(taskID: number, Year: number, Month: number, orgUnitID: number) {
+        this.secretaryService.viewTasksApi({ taskID, OrgUnitID: orgUnitID, Year, Month }).subscribe((res: any) => {
             this.secretaryService.taskData.set(res);
             this.router.navigate(['/entries-form']);
         })
@@ -144,6 +144,7 @@ export class SectorTableComponent {
     setTableData() {
         this.secretaryService.getInProgressTasksApi().subscribe((res: any) => {
             if (res.result == 'OK') {
+                console.log(res.items);
                 this.data.set(res.items);
             }
         })

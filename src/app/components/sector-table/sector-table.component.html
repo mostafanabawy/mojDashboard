@@ -24,7 +24,7 @@
             <ng-template slot="action" let-value="data">
                 <div class="flex items-center justify-center gap-2">
                     @if (store.user?.role == 'Manager') {
-                        <button (click)="view(value.taskID, value.year, value.month)" class="btn btn-sm border border-gray-400 hover:btn-primary">
+                        <button (click)="view(value.taskID, value.year, value.month, value.orgUnitID)" class="btn btn-sm border border-gray-400 hover:btn-primary">
                             عرض
                         </button>
                     }@else {
@@ -34,7 +34,7 @@
                         <button class="btn btn-sm bg-[#60583d] text-white transition-all shadow-lg hover:shadow-none text-nowrap" (click)="reject(value.taskID)">
                             إرجاع
                         </button>
-                        <button (click)="view(value.taskID, value.year, value.month)" class="btn btn-sm border border-gray-400 hover:btn-primary">
+                        <button (click)="view(value.taskID, value.year, value.month, value.orgUnitID)" class="btn btn-sm border border-gray-400 hover:btn-primary">
                             عرض
                         </button>
                     }

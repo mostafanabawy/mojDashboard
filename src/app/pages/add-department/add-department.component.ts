@@ -15,8 +15,8 @@ export class AddDepartmentComponent {
   formTypeToOpen = signal<any>(null);
   cols = [
         { field: 'Name', title: 'اسم الوحدة التنظيمية'},
-        { field: 'Level', title: 'مستوى الوحدة'},
-        { field: 'action', title: 'الإجراءات' }
+        { field: 'Level', title: 'مستوى الوحدة', filter: false},
+        { field: 'action', title: 'الإجراءات', filter: false }
     ];
   constructor(
     private secretaryService: SecretaryService,
