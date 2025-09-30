@@ -143,7 +143,7 @@ export class EntriesFormComponent {
             showConfirmButton: true,
             confirmButtonText: 'موافق'
           })
-        }else{
+        } else {
           this.isDisabled.set(false)
         }
       })
@@ -215,7 +215,7 @@ export class EntriesFormComponent {
       }));
       console.log(this.secretaryService.taskToEditId()?.OrgUnitID);
       console.log(this.secretaryService.taskData());
-      
+
       const payload = {
         OrgUnitID: this.store.user?.departmentId || this.secretaryService.taskData().task.orgUnitID, // append manually
         Status: this.saveType,
@@ -235,7 +235,10 @@ export class EntriesFormComponent {
           title: "تم إدخال البيانات بنجاح",
           padding: '10px 20px',
         });
-        this.entryForm.reset();
+        this.entryForm.reset({
+          ...this.entryForm.getRawValue(), // keep other values if you want to preserve them
+          year: new Date().getFullYear()
+        });
         this.router.navigate(['/'])
       },
         (err: any) => {
@@ -268,7 +271,10 @@ export class EntriesFormComponent {
           title: "تم الإرجاع بنجاح",
           padding: '10px 20px',
         });
-        this.entryForm.reset();
+        this.entryForm.reset({
+          ...this.entryForm.getRawValue(), // keep other values if you want to preserve them
+          year: new Date().getFullYear()
+        });
         this.router.navigate(['/tasks-table'])
       })
     }

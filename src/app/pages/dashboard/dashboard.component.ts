@@ -96,7 +96,7 @@ getYearsOptions(){
     const pdfWidth = pdf.internal.pageSize.getWidth();    // Get PDF page width dynamically
     const pdfHeight = pdf.internal.pageSize.getHeight();  // Get PDF page height dynamically
 
-    const margin = 19; // 10mm margin on all sides (top, right, bottom, left)
+    const margin = 25; // 10mm margin on all sides (top, right, bottom, left)
     const contentWidth = pdfWidth - (margin * 2);  // Usable width for content
     const contentHeight = pdfHeight - (margin * 2); // Usable height for content
 
