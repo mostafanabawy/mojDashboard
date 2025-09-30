@@ -18,6 +18,7 @@ import { UsersModalComponent } from './users-modal/users-modal.component';
 import { ChangePassModalComponent } from './change-pass-modal/change-pass-modal.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { DepartmentsFormComponent } from './departments-form/departments-form.component';
+import { DraftTableComponent } from './draft-table/draft-table.component';
 
 
 
@@ -41,7 +42,8 @@ import { DepartmentsFormComponent } from './departments-form/departments-form.co
     UsersModalComponent,
     ChangePassModalComponent,
     ConfirmModalComponent,
-    DepartmentsFormComponent
+    DepartmentsFormComponent,
+    DraftTableComponent
   ],
   exports: [
     DepartmentRealEstateComponent,
@@ -59,7 +61,8 @@ import { DepartmentsFormComponent } from './departments-form/departments-form.co
     UsersModalComponent,
     ChangePassModalComponent,
     ConfirmModalComponent,
-    DepartmentsFormComponent
+    DepartmentsFormComponent,
+    DraftTableComponent
   ]
 })
 export class ComponentsModule { }

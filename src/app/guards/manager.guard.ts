@@ -9,7 +9,7 @@ export const managerGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   return store.select(selectUser).pipe(
     map((user: any) => {
-      if (user.role !== 'manager') {
+      if (user.role !== 'Manager') {
         router.navigate(['/']); // redirect if not manager
         return false;
       }

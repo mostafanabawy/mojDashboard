@@ -49,6 +49,13 @@
                                         'تمرير الصورة'}}</a>
                                 </li>
                                 }
+                                @if (store.auth.user?.role == 'Manager') {
+                                <li>
+                                    <a routerLink="/draft-table" routerLinkActive="active"
+                                        [routerLinkActiveOptions]="{exact: true}" (click)="toggleMobileMenu()">{{
+                                        'بيانات محفوظة كمسودة'}}</a>
+                                </li>
+                                }
                                 @if(store.auth.user?.role == 'Secretary') {
 
                                 <li>

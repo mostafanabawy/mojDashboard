@@ -44,15 +44,15 @@ export class DashboardComponent {
     })
   }
 
-getYearsOptions(){
-  const currentYear = new Date().getFullYear();
-  const limit = currentYear + 5;
-  const years = [];
-  for (let year = currentYear-3; year <= limit; year++) {
-    years.push(year);
+  getYearsOptions() {
+    const currentYear = new Date().getFullYear();
+    const limit = currentYear + 5;
+    const years = [];
+    for (let year = currentYear - 3; year <= limit; year++) {
+      years.push(year);
+    }
+    return years;
   }
-  return years;
-}
   toggleLoader() {
     this.storeData.dispatch({ type: 'toggleMainLoader', payload: true });
     setTimeout(() => {
@@ -83,6 +83,14 @@ getYearsOptions(){
   }
   async exportDashboard() {
     this.exportPDFBtnLoader.set(true);
+    // 1. **CRITICAL STEP: WAIT FOR ALL DOCUMENT FONTS TO LOAD**
+    // This waits for all @font-face rules to resolve, ensuring correct metrics for html2canvas.
+    await document.fonts.ready;
+
+    // Optional: Add a slight safety delay (e.g., 50ms) just to ensure the DOM is stable
+    // after the font ready event. This is often not needed, but can act as a safeguard.
+    await new Promise(resolve => setTimeout(resolve, 50));
+
     const data = this.dashboardContent.nativeElement;
 
     const canvas = await html2canvas(data, {

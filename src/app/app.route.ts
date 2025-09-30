@@ -24,6 +24,7 @@ import { managerSecretaryGuard } from './guards/manager-secretary.guard';
 import { AddDepartmentComponent } from './pages/add-department/add-department.component';
 import { DashboardSliderComponent } from './pages/dashboard-slider/dashboard-slider.component';
 import { viewerGuard } from './guards/viewer.guard';
+import { DraftTableComponent } from './components/draft-table/draft-table.component';
 
 export const routes: Routes = [
     {
@@ -35,6 +36,7 @@ export const routes: Routes = [
             { path: '', component: DashboardComponent, data: { title: 'Home' } },
             /* { path: 'real-estate-brokerage', component: DepartmentRealEstateBrokerageComponent, data: { title: 'Real Estate and Documentation' } }, */
             { path: 'entries-form', component: EntriesFormComponent, canActivate: [managerSecretaryGuard], data: { title: 'Form' } },
+            { path: 'draft-table', component: DraftTableComponent, canActivate: [managerGuard], data: { title: 'Form' } },
             { path: 'tasks-table', component: SectorTableComponent, canActivate: [secretaryGuard], data: { title: 'Tasks' } },
             { path: 'users', component: ProfileComponent, canActivate: [secretaryGuard], data: { title: 'Users' } },
             { path: 'add-department', component: AddDepartmentComponent, canActivate: [secretaryGuard], data: { title: 'Add Department' } },

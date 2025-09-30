@@ -36,7 +36,7 @@ export class EntriesFormComponent {
         }
       }, { allowSignalWrites: true })
     }
-    if (this.store.user?.role == 'Secretary') {
+    if (this.store.user?.role == 'Secretary' || this.store.user?.role == 'Manager') {
       effect(() => {
         if (this.dashboardService.formData()) {
           this.initForm()
@@ -88,7 +88,8 @@ export class EntriesFormComponent {
         let monthControl = this.entryForm.get('Month')
         let previousEntry = res.items.find((item: any) => {
 
-          return item.Year == value && item.Month == monthControl?.value && item.OrgUnitID == this.store.user?.departmentId
+          return item.Year == value && item.Month == monthControl?.value && item.OrgUnitID == this.store.user?.departmentId &&
+            item.Status === 'تحت الإجراء'
         })
         if (previousEntry) {
           this.isDisabled.set(true);
@@ -213,8 +214,6 @@ export class EntriesFormComponent {
         ...entry,
         Value: entry.Value.toString()
       }));
-      console.log(this.secretaryService.taskToEditId()?.OrgUnitID);
-      console.log(this.secretaryService.taskData());
 
       const payload = {
         OrgUnitID: this.store.user?.departmentId || this.secretaryService.taskData().task.orgUnitID, // append manually
@@ -278,5 +277,8 @@ export class EntriesFormComponent {
         this.router.navigate(['/tasks-table'])
       })
     }
+  }
+  ngOnDestroy() {
+    this.secretaryService.taskData.set(null); // clear when leaving
   }
 }
