@@ -15,7 +15,7 @@ export class DepartmentRealEstateComponent {
     effect(() => {
       if (this.dashboardService.realEstateSectorData()) {
         this.realEstateDepartmentData.set(
-          this.dashboardService.realEstateSectorData().Children.find((d: any) => d.OrgUnitID == 13)
+          this.dashboardService.realEstateSectorData().Children?.find((d: any) => d.OrgUnitID == 13)
         )
         this.buyAndSellGroup.set(
           this.realEstateDepartmentData().MonthlyTasks[0]?.TaskEntries.filter((d: any) => d.GroupName == 'عمليات البيع والشراء').map((item: any) => {

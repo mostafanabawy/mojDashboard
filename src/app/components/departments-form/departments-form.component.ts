@@ -89,9 +89,9 @@ export class DepartmentsFormComponent {
           title: "تم التعديل بنجاح",
           padding: '10px 20px',
         });
+        this.closed.emit('yes');
+        this.modal22.close();
       })
     }
-    this.closed.emit('yes');
-    this.modal22.close();
   }
 }

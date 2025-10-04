@@ -83,7 +83,7 @@ export class EntriesFormComponent {
     })
     this.groupedEntries = this.groupEntriesByGroupName(initialEntries);
 
-    this.entryForm.get('Year')?.valueChanges.subscribe((value) => {
+    /* this.entryForm.get('Year')?.valueChanges.subscribe((value) => {
       this.managerService.getAllEntries().subscribe((res: any) => {
         let monthControl = this.entryForm.get('Month')
         let previousEntry = res.items.find((item: any) => {
@@ -103,11 +103,7 @@ export class EntriesFormComponent {
               Label: entry.label,
               Value: entry.value
             })))
-            /* Entries: this.secretaryService.taskData().entries.map((entry: any) => ({
-                GroupName: entry.groupName,
-                Label: entry.label,
-                Value: entry.value
-              })) */
+            
           })
           Swal.fire({
             icon: 'error',
@@ -117,7 +113,7 @@ export class EntriesFormComponent {
           })
         }
       })
-    })
+    }) */
     this.entryForm.get('Month')?.valueChanges.subscribe((value) => {
       this.managerService.getAllEntries().subscribe((res: any) => {
         let yearControl = this.entryForm.get('Year')
@@ -145,7 +141,12 @@ export class EntriesFormComponent {
             confirmButtonText: 'موافق'
           })
         } else {
-          this.isDisabled.set(false)
+          this.isDisabled.set(false);
+          this.entryForm.get('Entries')?.patchValue(this.dashboardService.realEstateSectorData().result.items.map((entry: any) => ({
+            GroupName: entry.GroupName,
+            Label: entry.Label,
+            Value: ''
+          })))
         }
       })
     })
@@ -235,8 +236,13 @@ export class EntriesFormComponent {
           padding: '10px 20px',
         });
         this.entryForm.reset({
-          ...this.entryForm.getRawValue(), // keep other values if you want to preserve them
-          year: new Date().getFullYear()
+          Entries: this.dashboardService.realEstateSectorData().result.items.map((entry: any) => ({
+            GroupName: entry.GroupName,
+            Label: entry.Label,
+            Value: ''
+          })), // keep other values if you want to preserve them
+          Year: new Date().getFullYear(),
+          Month: ''
         });
         this.router.navigate(['/'])
       },
@@ -271,8 +277,13 @@ export class EntriesFormComponent {
           padding: '10px 20px',
         });
         this.entryForm.reset({
-          ...this.entryForm.getRawValue(), // keep other values if you want to preserve them
-          year: new Date().getFullYear()
+          Entries: this.dashboardService.realEstateSectorData().result.items.map((entry: any) => ({
+            GroupName: entry.GroupName,
+            Label: entry.Label,
+            Value: ''
+          })), // keep other values if you want to preserve them
+          Year: new Date().getFullYear(),
+          Month: ''
         });
         this.router.navigate(['/tasks-table'])
       })

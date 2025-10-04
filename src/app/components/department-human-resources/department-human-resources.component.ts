@@ -24,7 +24,7 @@ export class DepartmentHumanResourcesComponent {
   ) {
     effect(() => {
       if (this.dashboardService.financialAffairsSectorData()) {
-        this.humanResourcesDepartment.set(this.dashboardService.financialAffairsSectorData().Children.find((d: any) => d.OrgUnitID == 22))
+        this.humanResourcesDepartment.set(this.dashboardService.financialAffairsSectorData().Children?.find((d: any) => d.OrgUnitID == 22))
 
         this.yearBudgetGroup.set(this.humanResourcesDepartment().MonthlyTasks[0]?.TaskEntries
           .filter((d: any) => d.GroupName == `موازنة العام`).map((item: any) => {

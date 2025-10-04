@@ -43,7 +43,7 @@ export class UsersModalComponent {
   }
   ngOnInit() {
     this.secretaryService.getDepartments().subscribe((res: any) => {
-      this.departmentsOptions.set(res.items)
+      this.departmentsOptions.set(res.items.filter((dep: any) => dep.Level === 'إدارة'))
     });
   }
   ngAfterViewInit() {

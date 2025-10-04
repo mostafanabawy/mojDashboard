@@ -37,6 +37,7 @@ export class AddDepartmentComponent {
   }
   setTableData(page?: number) {
     this.secretaryService.getDepartments().subscribe((res: any) => {
+      console.log(res.items);
       this.data.set(res.items);
     })
   }

@@ -16,7 +16,7 @@ export class DepartmentFinancialAdministrativeAffairsComponent {
   ) {
     effect(() => {
       if (this.dashboardService.financialAffairsSectorData()) {
-        this.financialAndAdministrativeAffairsDepartment.set(this.dashboardService.financialAffairsSectorData().Children.find((d: any) => d.OrgUnitID == 21))
+        this.financialAndAdministrativeAffairsDepartment.set(this.dashboardService.financialAffairsSectorData().Children?.find((d: any) => d.OrgUnitID == 21))
 
         this.projectsStatisticsGroupLess.set(this.financialAndAdministrativeAffairsDepartment().MonthlyTasks[0]?.TaskEntries
           .filter((d: any) => d.GroupName == 'احصائيات المشاريع الأقل من 200 ألف').map((item: any) => {

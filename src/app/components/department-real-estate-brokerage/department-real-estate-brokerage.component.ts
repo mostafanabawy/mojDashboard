@@ -36,7 +36,7 @@ export class DepartmentRealEstateBrokerageComponent {
 
         } else if (this.role() == 'Viewer' || this.role() == 'Secretary') {
           this.realEstateBrokerageData.set(
-            this.dashboardService.realEstateSectorData().Children.find((d: any) => d.OrgUnitID == 12)
+            this.dashboardService.realEstateSectorData().Children?.find((d: any) => d.OrgUnitID == 12)
           )
 
           this.brokerageGroup.set(

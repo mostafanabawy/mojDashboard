@@ -21,7 +21,7 @@ export class SectorLegalAffairsComponent {
     effect(() => {
       if (this.dashboardService.legalAffairsSectorData()) {
         this.translationGroup.set(
-          this.dashboardService.legalAffairsSectorData().Children.find((d: any) => d.OrgUnitID == 2).MonthlyTasks[0]?.TaskEntries.filter((d: any) => d.EntryID !== 42006).map((item: any) => {
+          this.dashboardService.legalAffairsSectorData().Children?.find((d: any) => d.OrgUnitID == 2).MonthlyTasks[0]?.TaskEntries.filter((d: any) => d.EntryID !== 42006).map((item: any) => {
             return {
               statValue: item.Value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
               statLabel: item.Label
@@ -29,7 +29,7 @@ export class SectorLegalAffairsComponent {
           })
         )
         this.translationLast.set(
-          this.dashboardService.legalAffairsSectorData().Children.find((d: any) => d.OrgUnitID == 2).MonthlyTasks[0]?.TaskEntries.filter((d: any) => d.EntryID == 42006).map((item: any) => {
+          this.dashboardService.legalAffairsSectorData().Children?.find((d: any) => d.OrgUnitID == 2).MonthlyTasks[0]?.TaskEntries.filter((d: any) => d.EntryID == 42006).map((item: any) => {
             return {
               statValue: item.Value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
               statLabel: item.Label
@@ -38,7 +38,7 @@ export class SectorLegalAffairsComponent {
         )
 
         this.expertsDepartmentGroup.set(
-          this.dashboardService.legalAffairsSectorData().Children.find((d: any) => d.OrgUnitID == 3).MonthlyTasks[0]?.TaskEntries
+          this.dashboardService.legalAffairsSectorData().Children?.find((d: any) => d.OrgUnitID == 3).MonthlyTasks[0]?.TaskEntries
           .filter((d: any) => d.GroupName == 'إدارة الخبراء').map((item: any) => {
             return {
               statValue: item.Value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
@@ -47,7 +47,7 @@ export class SectorLegalAffairsComponent {
           })
         )
         this.expertsClassificationGroup.set(
-          this.dashboardService.legalAffairsSectorData().Children.find((d: any) => d.OrgUnitID == 3).MonthlyTasks[0]?.TaskEntries
+          this.dashboardService.legalAffairsSectorData().Children?.find((d: any) => d.OrgUnitID == 3).MonthlyTasks[0]?.TaskEntries
           .filter((d: any) => d.GroupName == 'تصنيف الخبراء').map((item: any) => {
             return {
               statValue: item.Value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
@@ -57,7 +57,7 @@ export class SectorLegalAffairsComponent {
         )
 
         this.lawyerGroup.set(
-          this.dashboardService.legalAffairsSectorData().Children.find((d: any) => d.OrgUnitID == 4).MonthlyTasks[0]?.TaskEntries.map((item: any) => {
+          this.dashboardService.legalAffairsSectorData().Children?.find((d: any) => d.OrgUnitID == 4).MonthlyTasks[0]?.TaskEntries.map((item: any) => {
             return {
               statValue: item.Value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
               statLabel: item.Label
@@ -66,7 +66,7 @@ export class SectorLegalAffairsComponent {
         )
 
         this.casesStat.set(
-          this.dashboardService.legalAffairsSectorData().Children.find((d: any) => d.OrgUnitID == 3).MonthlyTasks[0]?.TaskEntries
+          this.dashboardService.legalAffairsSectorData().Children?.find((d: any) => d.OrgUnitID == 3).MonthlyTasks[0]?.TaskEntries
           .filter((d: any) => d.EntryID == 45005).map((item: any) => {
             return {
               statValue: item.Value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
@@ -75,7 +75,7 @@ export class SectorLegalAffairsComponent {
           })
         )
         this.judgementsStat.set(
-          this.dashboardService.legalAffairsSectorData().Children.find((d: any) => d.OrgUnitID == 3).MonthlyTasks[0]?.TaskEntries
+          this.dashboardService.legalAffairsSectorData().Children?.find((d: any) => d.OrgUnitID == 3).MonthlyTasks[0]?.TaskEntries
           .filter((d: any) => d.EntryID == 45006 || d.EntryID == 45007).map((item: any) => {
             return {
               statValue: item.Value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
@@ -84,7 +84,7 @@ export class SectorLegalAffairsComponent {
           })
         )
         this.contractsStat.set(
-          this.dashboardService.legalAffairsSectorData().Children.find((d: any) => d.OrgUnitID == 3).MonthlyTasks[0]?.TaskEntries
+          this.dashboardService.legalAffairsSectorData().Children?.find((d: any) => d.OrgUnitID == 3).MonthlyTasks[0]?.TaskEntries
           .filter((d: any) => d.EntryID == 45008).map((item: any) => {
             return {
               statValue: item.Value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
@@ -93,7 +93,7 @@ export class SectorLegalAffairsComponent {
           })
         )
         this.agreementsStat.set(
-          this.dashboardService.legalAffairsSectorData().Children.find((d: any) => d.OrgUnitID == 3).MonthlyTasks[0]?.TaskEntries
+          this.dashboardService.legalAffairsSectorData().Children?.find((d: any) => d.OrgUnitID == 3).MonthlyTasks[0]?.TaskEntries
           .filter((d: any) => d.EntryID == 45009).map((item: any) => {
             return {
               statValue: item.Value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),

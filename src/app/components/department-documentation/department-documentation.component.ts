@@ -11,7 +11,7 @@ export class DepartmentDocumentationComponent {
     effect(() => {
       if (this.dashboardService.realEstateSectorData()) {
         this.documentationDataGroup.set(
-          this.dashboardService.realEstateSectorData().Children.find((d: any) => d.OrgUnitID == 11).MonthlyTasks[0]?.TaskEntries.map((item: any) => {
+          this.dashboardService.realEstateSectorData().Children?.find((d: any) => d.OrgUnitID == 11).MonthlyTasks[0]?.TaskEntries.map((item: any) => {
             return {
               statValue: item.Value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
               statLabel: item.Label
