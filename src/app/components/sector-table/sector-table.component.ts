@@ -20,12 +20,12 @@ export class SectorTableComponent {
         { field: 'orgUnitID', title: 'معرف الوحدة التنظيمية' },
         { field: 'orgUnitName', title: 'اسم الوحدة التنظيمية' },
         { field: 'managerName', title: 'اسم المدير' },
-        { field: 'managerEmail', title: 'البريد الإلكتروني للمدير' },
         { field: 'year', title: 'السنة' },
         { field: 'month', title: 'الشهر' },
         { field: 'status', title: 'الحالة' },
         { field: 'action', title: 'الإجراءات' }
     ];
+    /* { field: 'managerEmail', title: 'البريد الإلكتروني للمدير' }, */
     rows = signal<any>([]);
     data = signal<any>(null);
     constructor(
