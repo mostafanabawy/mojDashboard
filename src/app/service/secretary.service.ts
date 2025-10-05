@@ -64,7 +64,7 @@ export class SecretaryService {
 
   getUsers(page = 1) {
     const headers = new HttpHeaders().set('x-sr-token', this.store.token!);
-    return this.http.post(`${this.baseUrl}/api/MOJUsers/getpagewithsearch/${page}/10/UserID/2`,
+    return this.http.post(`${this.baseUrl}/api/MOJUsers/getpagewithsearch/1/1000000/UserID/2`,
       {}, { headers }
     );
   }

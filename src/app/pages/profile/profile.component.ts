@@ -50,8 +50,8 @@ export class ProfileComponent {
         this.store = d;
       });
   }
-  setTableData(page?: number) {
-    this.secretaryService.getUsers(page).subscribe((res: any) => {
+  setTableData() {
+    this.secretaryService.getUsers(1).subscribe((res: any) => {
       this.data.set(
         res.result.items.map((item: any) => {
           delete item.PasswordHash
@@ -80,13 +80,13 @@ export class ProfileComponent {
     this.isModal.update(n => n + 1);
 
   }
-  onServerChange(event: any) {
+  /* onServerChange(event: any) {
     switch (event.change_type) {
       case 'page':
         this.setTableData(event.current_page)
         break;
     }
-  }
+  } */
   onUserClose(event: any) {
     if (event == 'no') {
       this.isModal.update(n => n * 0);

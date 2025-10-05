@@ -20,6 +20,7 @@ export class DraftTableComponent {
     { field: 'OrgUnitID', title: 'معرف الوحدة التنظيمية' },
     { field: 'Year', title: 'السنة' },
     { field: 'Month', title: 'الشهر' },
+    { field: 'Status', title: 'الحالة' },
     { field: 'action', title: 'الإجراءات' }
   ];
   rows = signal<any>([]);
@@ -75,7 +76,7 @@ export class DraftTableComponent {
   setTableData() {
     this.managerService.getAllEntries().subscribe((res: any) => {
       let data  = res.items.filter((item: any)=> {
-        return item.OrgUnitID == this.store.user?.departmentId  && item.Status === 'لم يبدأ'
+        return item.OrgUnitID == this.store.user?.departmentId  && (item.Status === 'لم يبدأ' || item.Status === 'تم ارجاعه للتدقيق')
       })
       console.log(data);
       this.rows.set(data)
