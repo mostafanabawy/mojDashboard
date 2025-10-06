@@ -93,9 +93,12 @@ export class DashboardComponent {
 
     const data = this.dashboardContent.nativeElement;
 
+    data.style.width = '1200px';
+    data.style.maxWidth = '1200px';
     const canvas = await html2canvas(data, {
       scale: 2, // Keep this for quality
-      useCORS: true
+      useCORS: true,
+      windowWidth: 1200
     });
 
     const imgData = canvas.toDataURL('image/png');
@@ -138,6 +141,8 @@ export class DashboardComponent {
       heightLeft -= (contentHeight + margin); // Subtract content height + bottom margin for next iteration
     }
 
+    data.style.width = '';
+    data.style.maxWidth = '';
     this.exportPDFBtnLoader.set(false);
     pdf.save('dashboard.pdf');
   }
