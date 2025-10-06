@@ -60,13 +60,13 @@ export class EntriesFormComponent {
 
     /* this.initForm(); */
     effect(() => {
-      if( this.secretaryService.taskData() && this.store.user?.role == 'Secretary') {
-        this.dashboardService.getUserEntryScreen(`${this.secretaryService.taskData().task.orgUnitID}` , this.store.token!).subscribe((res: any) => {
+      if (this.secretaryService.taskData() && this.store.user?.role == 'Secretary') {
+        this.dashboardService.getUserEntryScreen(`${this.secretaryService.taskData().task.orgUnitID}`, this.store.token!).subscribe((res: any) => {
           this.dashboardService.formData.set(res);
           this.initForm();
         })
-      }else{
-        this.dashboardService.getUserEntryScreen(`${this.store.user?.departmentId}` , this.store.token!).subscribe((res: any) => {
+      } else {
+        this.dashboardService.getUserEntryScreen(`${this.store.user?.departmentId}`, this.store.token!).subscribe((res: any) => {
           this.dashboardService.formData.set(res);
           this.initForm();
         })
@@ -141,7 +141,7 @@ export class EntriesFormComponent {
               GroupName: entry.groupName,
               Label: entry.label,
               Value: entry.value
-            })))
+            })), { emitEvent: false })
           })
           Swal.fire({
             icon: 'error',
