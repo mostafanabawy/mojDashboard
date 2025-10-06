@@ -2,7 +2,11 @@
 <form *ngIf="entryForm" [formGroup]="entryForm" (ngSubmit)="onSubmit()"
     class="p-6 space-y-6 bg-white shadow-rose-950 rounded-md text-right mt-2">
 
-    <h2 class="text-3xl font-bold mb-10 mt-6">إدخال بيانات الإدارة</h2>
+    @if(store.user?.role == 'Manager'){
+        <h2 class="text-3xl font-bold mb-10 mt-6">إدخال بيانات الإدارة</h2>
+    }@else {
+        <h2 class="text-3xl font-bold mb-10 mt-6">بيانات الإدارة</h2>
+    }
 
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -57,7 +61,7 @@
 
     <div class="flex flex-wrap justify-start gap-4 mt-8">
         <button type="submit" [disabled]="isDisabled()" (click)="setSaveType(store.user?.role == 'Manager'?  'تحت الإجراء': 
-            store.user?.role == 'Secretary'? 'لم يبدأ': ''
+            store.user?.role == 'Secretary'? 'مكتمل': 'لم يبدأ'
         )" class="bg-primary  hover:bg-opacity-90 text-white font-semibold px-6 py-2 rounded">
             الحفظ النهائي
         </button>

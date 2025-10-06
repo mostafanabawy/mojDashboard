@@ -255,15 +255,17 @@ export class EntriesFormComponent {
           title: "تم إدخال البيانات بنجاح",
           padding: '10px 20px',
         });
-        this.entryForm.reset({
-          Entries: this.dashboardService.realEstateSectorData().result.items.map((entry: any) => ({
-            GroupName: entry.GroupName,
-            Label: entry.Label,
-            Value: ''
-          })), // keep other values if you want to preserve them
-          Year: new Date().getFullYear(),
-          Month: ''
-        });
+        if (this.store.user?.role != 'Secretary') {
+          this.entryForm.reset({
+            Entries: this.dashboardService.realEstateSectorData().result.items.map((entry: any) => ({
+              GroupName: entry.GroupName,
+              Label: entry.Label,
+              Value: ''
+            })), // keep other values if you want to preserve them
+            Year: new Date().getFullYear(),
+            Month: ''
+          });
+        }
         this.router.navigate(['/'])
       },
         (err: any) => {
@@ -296,16 +298,18 @@ export class EntriesFormComponent {
           title: "تم الإرجاع بنجاح",
           padding: '10px 20px',
         });
-        this.entryForm.reset({
-          Entries: this.dashboardService.realEstateSectorData().result.items.map((entry: any) => ({
-            GroupName: entry.GroupName,
-            Label: entry.Label,
-            Value: ''
-          })), // keep other values if you want to preserve them
-          Year: new Date().getFullYear(),
-          Month: ''
-        });
-        this.router.navigate(['/tasks-table'])
+        if (this.store.user?.role != 'Secretary') {
+          this.entryForm.reset({
+            Entries: this.dashboardService.realEstateSectorData().result.items.map((entry: any) => ({
+              GroupName: entry.GroupName,
+              Label: entry.Label,
+              Value: ''
+            })), // keep other values if you want to preserve them
+            Year: new Date().getFullYear(),
+            Month: ''
+          });
+        }
+        this.router.navigate(['/tasks-table']);
       })
     }
   }
