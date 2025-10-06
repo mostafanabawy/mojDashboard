@@ -2,6 +2,7 @@ import { Component, effect, input, signal } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Subject, takeUntil } from 'rxjs';
 import { DashboardService } from 'src/app/service/dashboard.service';
 import { ManagerService } from 'src/app/service/manager.service';
 import { SecretaryService } from 'src/app/service/secretary.service';
@@ -16,6 +17,7 @@ import Swal from 'sweetalert2';
 export class EntriesFormComponent {
   entryForm!: FormGroup;
   store!: AuthState;
+  private destroyForm$ = new Subject<void>();
   /* entryBlock = input.required<any>(); */
   groupedEntries!: { groupName: string; controls: FormGroup<any>[]; }[];
   saveType: string = '';
@@ -50,6 +52,7 @@ export class EntriesFormComponent {
                 Value: entry.value
               }), { emitEvent: false })
             });
+            this.registerValueChangeHandlers();
           } else {
             router.navigate(['/']);
           }
@@ -64,11 +67,13 @@ export class EntriesFormComponent {
         this.dashboardService.getUserEntryScreen(`${this.secretaryService.taskData().task.orgUnitID}`, this.store.token!).subscribe((res: any) => {
           this.dashboardService.formData.set(res);
           this.initForm();
+          this.registerValueChangeHandlers();
         })
       } else {
         this.dashboardService.getUserEntryScreen(`${this.store.user?.departmentId}`, this.store.token!).subscribe((res: any) => {
           this.dashboardService.formData.set(res);
           this.initForm();
+          this.registerValueChangeHandlers();
         })
       }
     }, { allowSignalWrites: true })
@@ -83,7 +88,48 @@ export class EntriesFormComponent {
         this.store = d;
       });
   }
+  registerValueChangeHandlers() {
+    this.entryForm.get('Month')?.valueChanges.pipe(takeUntil(this.destroyForm$)).subscribe((value) => {
+      this.managerService.getAllEntries().subscribe((res: any) => {
+        let yearControl = this.entryForm.get('Year')
+        let previousEntry = res.items.find((item: any) => {
+
+          return item.Year == yearControl?.value && item.Month == value && item.OrgUnitID == this.store.user?.departmentId && item.Status === 'تحت الإجراء'
+        })
+        if (previousEntry) {
+          this.isDisabled.set(true);
+          let payload = previousEntry;
+          delete payload.Status
+          delete payload.CreatedDate
+          payload.taskID = payload.TaskID
+          this.secretaryService.viewTasksApi(payload).subscribe((res: any) => {
+            this.entryForm.get('Entries')?.patchValue(res.entries.map((entry: any) => ({
+              GroupName: entry.groupName,
+              Label: entry.label,
+              Value: entry.value
+            })), { emitEvent: false })
+          })
+          Swal.fire({
+            icon: 'error',
+            title: 'هذا الشهر تم إدخال بياناته من قبل',
+            showConfirmButton: true,
+            confirmButtonText: 'موافق'
+          })
+        } else if (!previousEntry) {
+          this.isDisabled.set(false);
+          this.entryForm.get('Entries')?.patchValue(this.dashboardService.realEstateSectorData().result.items.map((entry: any) => ({
+            GroupName: entry.GroupName,
+            Label: entry.Label,
+            Value: ''
+          })), { emitEvent: false })
+        }
+      })
+    })
+  }
   initForm() {
+    if (this.entryForm) {
+      this.destroyForm$.next(); // clean old subscriptions
+    }
     const initialEntries = this.getInitialEntries(this.store.user?.role == 'Manager' ? this.dashboardService.realEstateSectorData().result.items : this.dashboardService.formData().result.items);
     this.entryForm = this.fb.group({
       Year: [{ value: new Date().getFullYear(), disabled: true }],
@@ -123,42 +169,7 @@ export class EntriesFormComponent {
         }
       })
     }) */
-    this.entryForm.get('Month')?.valueChanges.subscribe((value) => {
-      this.managerService.getAllEntries().subscribe((res: any) => {
-        let yearControl = this.entryForm.get('Year')
-        let previousEntry = res.items.find((item: any) => {
 
-          return item.Year == yearControl?.value && item.Month == value && item.OrgUnitID == this.store.user?.departmentId && item.Status === 'تحت الإجراء'
-        })
-        if (previousEntry) {
-          this.isDisabled.set(true);
-          let payload = previousEntry;
-          delete payload.Status
-          delete payload.CreatedDate
-          payload.taskID = payload.TaskID
-          this.secretaryService.viewTasksApi(payload).subscribe((res: any) => {
-            this.entryForm.get('Entries')?.patchValue(res.entries.map((entry: any) => ({
-              GroupName: entry.groupName,
-              Label: entry.label,
-              Value: entry.value
-            })))
-          })
-          Swal.fire({
-            icon: 'error',
-            title: 'هذا الشهر تم إدخال بياناته من قبل',
-            showConfirmButton: true,
-            confirmButtonText: 'موافق'
-          })
-        } else if(!previousEntry && !this.secretaryService.taskData()) {
-          this.isDisabled.set(false);
-          this.entryForm.get('Entries')?.patchValue(this.dashboardService.realEstateSectorData().result.items.map((entry: any) => ({
-            GroupName: entry.GroupName,
-            Label: entry.Label,
-            Value: ''
-          })))
-        }
-      })
-    })
   }
 
   getInitialEntries(entriesData: any) {
