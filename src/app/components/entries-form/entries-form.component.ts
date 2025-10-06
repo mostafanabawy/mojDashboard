@@ -59,10 +59,19 @@ export class EntriesFormComponent {
 
 
     /* this.initForm(); */
-    this.dashboardService.getUserEntryScreen('12', this.store.token!).subscribe((res: any) => {
-      this.dashboardService.formData.set(res);
-      this.initForm();
-    })
+    effect(() => {
+      if( this.secretaryService.taskData() && this.store.user?.role == 'Secretary') {
+        this.dashboardService.getUserEntryScreen(`${this.secretaryService.taskData().task.orgUnitID}` , this.store.token!).subscribe((res: any) => {
+          this.dashboardService.formData.set(res);
+          this.initForm();
+        })
+      }else{
+        this.dashboardService.getUserEntryScreen(`${this.store.user?.departmentId}` , this.store.token!).subscribe((res: any) => {
+          this.dashboardService.formData.set(res);
+          this.initForm();
+        })
+      }
+    }, { allowSignalWrites: true })
   }
 
   initStore() {

@@ -18,6 +18,7 @@ export class ProfileComponent {
   isModal = signal(0);
   isModal2 = signal(0);
   cols = [
+    { field: 'index', title: '#', filter: false },
     { field: 'DepartmentId', title: 'معرف الادارة', filter: false },
     { field: 'DepartmentName', title: 'اسم الادارة' },
     { field: 'Email', title: 'البريد الالكتروني', filter: false },
@@ -53,14 +54,14 @@ export class ProfileComponent {
   setTableData() {
     this.secretaryService.getUsers(1).subscribe((res: any) => {
       this.data.set(
-        res.result.items.map((item: any) => {
+        res.result.items.map((item: any, index: any) => {
           delete item.PasswordHash
           for (const key in item) {
             if (Object.prototype.hasOwnProperty.call(item, key)) {
               item[key] = item[key] || 'لا يوجد';
-
             }
           }
+          item.index = index + 1;
           return item
         })
       )

@@ -34,10 +34,17 @@ export class UsersModalComponent {
     effect(() => {
       if (this.secretaryService.userToEdit() && (this.modalType() == 'edit' || this.modalType() == 'add')) {
         let department = this.departmentsOptions().find((item: any) => item.OrgUnitID == this.secretaryService.userToEdit().DepartmentId)
-        this.userForm.patchValue({
-          ...this.secretaryService.userToEdit(),
-          DepartmentName: `${department.Name};${department.OrgUnitID};${department.ParentID};${department.Level}`
-        });
+        if (department) {
+          this.userForm.patchValue({
+            ...this.secretaryService.userToEdit(),
+            DepartmentName: `${department.Name};${department.OrgUnitID};${department.ParentID};${department.Level}`
+          });
+        } else {
+          this.userForm.patchValue({
+            ...this.secretaryService.userToEdit(),
+            DepartmentName: ``
+          });
+        }
       }
     }, { allowSignalWrites: true })
   }
