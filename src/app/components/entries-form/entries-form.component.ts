@@ -48,7 +48,7 @@ export class EntriesFormComponent {
                 GroupName: entry.groupName,
                 Label: entry.label,
                 Value: entry.value
-              }))
+              }), { emitEvent: false })
             });
           } else {
             router.navigate(['/']);
@@ -141,7 +141,7 @@ export class EntriesFormComponent {
               GroupName: entry.groupName,
               Label: entry.label,
               Value: entry.value
-            })), { emitEvent: false })
+            })))
           })
           Swal.fire({
             icon: 'error',
@@ -149,7 +149,7 @@ export class EntriesFormComponent {
             showConfirmButton: true,
             confirmButtonText: 'موافق'
           })
-        } else {
+        } else if(!previousEntry && !this.secretaryService.taskData()) {
           this.isDisabled.set(false);
           this.entryForm.get('Entries')?.patchValue(this.dashboardService.realEstateSectorData().result.items.map((entry: any) => ({
             GroupName: entry.GroupName,
