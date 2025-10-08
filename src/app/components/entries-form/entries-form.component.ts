@@ -34,7 +34,8 @@ export class EntriesFormComponent {
     if (this.store.user?.role == 'Manager') {
       effect(() => {
         if (this.dashboardService.realEstateSectorData()) {
-          this.initForm()
+          this.initForm();
+          this.registerValueChangeHandlers();
         }
       }, { allowSignalWrites: true })
     }
@@ -94,10 +95,13 @@ export class EntriesFormComponent {
         let yearControl = this.entryForm.get('Year')
         let previousEntry = res.items.find((item: any) => {
 
-          return item.Year == yearControl?.value && item.Month == value && item.OrgUnitID == this.store.user?.departmentId && item.Status === 'تحت الإجراء'
+          return item.Year == yearControl?.value && item.Month == value && item.OrgUnitID == this.store.user?.departmentId
         })
         if (previousEntry) {
-          this.isDisabled.set(true);
+          if ((previousEntry.Status !== 'تحت الإجراء' || previousEntry.Status !== 'مكتمل') && this.store.user?.role === 'Secretary') {
+            return;
+          }
+          let status = previousEntry.Status;
           let payload = previousEntry;
           delete payload.Status
           delete payload.CreatedDate
@@ -109,15 +113,18 @@ export class EntriesFormComponent {
               Value: entry.value
             })), { emitEvent: false })
           })
-          Swal.fire({
-            icon: 'error',
-            title: 'هذا الشهر تم إدخال بياناته من قبل',
-            showConfirmButton: true,
-            confirmButtonText: 'موافق'
-          })
+          if (status === 'تحت الإجراء' || status === 'مكتمل') {
+            this.isDisabled.set(true);
+            Swal.fire({
+              icon: 'error',
+              title: 'هذا الشهر تم إدخال بياناته من قبل',
+              showConfirmButton: true,
+              confirmButtonText: 'موافق'
+            })
+          }
         } else if (!previousEntry) {
           this.isDisabled.set(false);
-          this.entryForm.get('Entries')?.patchValue(this.dashboardService.realEstateSectorData().result.items.map((entry: any) => ({
+          this.entryForm.get('Entries')?.patchValue(this.dashboardService.realEstateSectorData()?.result?.items.map((entry: any) => ({
             GroupName: entry.GroupName,
             Label: entry.Label,
             Value: ''
@@ -138,38 +145,9 @@ export class EntriesFormComponent {
     })
     this.groupedEntries = this.groupEntriesByGroupName(initialEntries);
 
-    /* this.entryForm.get('Year')?.valueChanges.subscribe((value) => {
-      this.managerService.getAllEntries().subscribe((res: any) => {
-        let monthControl = this.entryForm.get('Month')
-        let previousEntry = res.items.find((item: any) => {
-
-          return item.Year == value && item.Month == monthControl?.value && item.OrgUnitID == this.store.user?.departmentId &&
-            item.Status === 'تحت الإجراء'
-        })
-        if (previousEntry) {
-          this.isDisabled.set(true);
-          let payload = previousEntry;
-          delete payload.Status
-          delete payload.CreatedDate
-          payload.taskID = payload.TaskID
-          this.secretaryService.viewTasksApi(payload).subscribe((res: any) => {
-            this.entryForm.get('Entries')?.patchValue(res.entries.map((entry: any) => ({
-              GroupName: entry.groupName,
-              Label: entry.label,
-              Value: entry.value
-            })))
-            
-          })
-          Swal.fire({
-            icon: 'error',
-            title: 'هذا الشهر تم إدخال بياناته من قبل',
-            showConfirmButton: true,
-            confirmButtonText: 'موافق'
-          })
-        }
-      })
-    }) */
-
+    if(!this.secretaryService.taskData()){
+      this.registerValueChangeHandlers();
+    }
   }
 
   getInitialEntries(entriesData: any) {

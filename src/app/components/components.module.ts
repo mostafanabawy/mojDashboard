@@ -19,6 +19,7 @@ import { ChangePassModalComponent } from './change-pass-modal/change-pass-modal.
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { DepartmentsFormComponent } from './departments-form/departments-form.component';
 import { DraftTableComponent } from './draft-table/draft-table.component';
+import { UnderReviewTableComponent } from './under-review-table/under-review-table.component';
 
 
 
@@ -43,10 +44,12 @@ import { DraftTableComponent } from './draft-table/draft-table.component';
     ChangePassModalComponent,
     ConfirmModalComponent,
     DepartmentsFormComponent,
-    DraftTableComponent
+    DraftTableComponent,
+    UnderReviewTableComponent
   ],
   exports: [
     DepartmentRealEstateComponent,
+    UnderReviewTableComponent,
     StatsBlockComponent,
     DepartmentRealEstateBrokerageComponent,
     DepartmentDocumentationComponent,

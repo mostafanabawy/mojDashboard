@@ -55,6 +55,11 @@
                                         [routerLinkActiveOptions]="{exact: true}" (click)="toggleMobileMenu()">{{
                                         'بيانات محفوظة كمسودة'}}</a>
                                 </li>
+                                <li>
+                                    <a routerLink="/under-review-table" routerLinkActive="active"
+                                        [routerLinkActiveOptions]="{exact: true}" (click)="toggleMobileMenu()">{{
+                                        'بيانات مرتجعة للتدقيق'}}</a>
+                                </li>
                                 }
                                 @if(store.auth.user?.role == 'Secretary') {
 

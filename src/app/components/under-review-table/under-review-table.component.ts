@@ -9,10 +9,10 @@ import { AuthState } from 'src/app/store/auth.reducer';
 import { AppState } from 'src/app/types/auth.types';
 
 @Component({
-  selector: 'app-draft-table',
-  templateUrl: './draft-table.component.html'
+  selector: 'app-under-review-table',
+  templateUrl: './under-review-table.component.html'
 })
-export class DraftTableComponent {
+export class UnderReviewTableComponent {
   store!: AuthState
   search5 = '';
   cols = [
@@ -63,10 +63,10 @@ export class DraftTableComponent {
         })
       )
       .subscribe((res: any) => {
-       
+
       })
   }
-  
+
   view(taskID: number, Year: number, Month: number, orgUnitID: number) {
     this.secretaryService.viewTasksApi({ taskID, OrgUnitID: orgUnitID, Year, Month }).subscribe((res: any) => {
       this.secretaryService.taskData.set(res);
@@ -75,12 +75,12 @@ export class DraftTableComponent {
   }
   setTableData() {
     this.managerService.getAllEntries().subscribe((res: any) => {
-      let data  = res.items.filter((item: any)=> {
-        return item.OrgUnitID == this.store.user?.departmentId  && (item.Status === 'لم يبدأ')
+      let data = res.items.filter((item: any) => {
+        return item.OrgUnitID == this.store.user?.departmentId && (item.Status === 'تم ارجاعه للتدقيق')
       })
       console.log(data);
       this.rows.set(data)
     })
-    
+
   }
 }
