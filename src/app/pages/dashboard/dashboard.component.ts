@@ -1,5 +1,5 @@
 import { Component, ElementRef, signal, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { DashboardService } from 'src/app/service/dashboard.service';
 import { SecretaryService } from 'src/app/service/secretary.service';
@@ -39,11 +39,21 @@ export class DashboardComponent {
 
   initForm() {
     this.timeForm = this.fb.group({
-      Month: [new Date().getMonth() + 1],
-      Year: [new Date().getFullYear()]
+      Month: [new Date().getMonth() + 1, Validators.required],
+      Year: [new Date().getFullYear(), Validators.required]
     })
   }
 
+  ngOnInit() {
+    if(this.timeForm.valid) {
+      this.onSubmit();
+    }
+    this.timeForm.valueChanges.subscribe(() => {
+      if(this.timeForm.valid) {
+        this.onSubmit();
+      }
+    });
+  }
   getYearsOptions() {
     const currentYear = new Date().getFullYear();
     const limit = currentYear + 5;
