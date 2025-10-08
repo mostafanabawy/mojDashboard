@@ -71,11 +71,11 @@ export class UsersModalComponent {
   onSubmit() {
     if (this.userForm.valid) {
       let payload = this.userForm.value;
-      const [name, orgUnitID, parentID, level] = payload.DepartmentName.split(';');
+      const [name, orgUnitID, parentID, level] = payload.DepartmentName?.split(';') || [];
       payload = {
         ...payload,
         IsActive: !!this.userForm.value.IsActive,
-        DepartmentName: name,
+        DepartmentName: name || null,
         DepartmentId: Number(orgUnitID),
       };
       if (level == 'إدارة') {
