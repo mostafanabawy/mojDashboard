@@ -93,12 +93,12 @@ export class DashboardComponent {
 
     const data = this.dashboardContent.nativeElement;
 
-    data.style.width = '1200px';
-    data.style.maxWidth = '1200px';
+    data.style.width = '1400px';
+    data.style.maxWidth = '1400px';
     const canvas = await html2canvas(data, {
       scale: 2, // Keep this for quality
       useCORS: true,
-      windowWidth: 1200
+      windowWidth: 1400
     });
 
     const imgData = canvas.toDataURL('image/png');
