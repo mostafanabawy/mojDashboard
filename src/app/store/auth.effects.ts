@@ -54,4 +54,49 @@ export class AuthEffects {
             ),
         { dispatch: false } // ❗ No action is dispatched from this effect
     );
+
+
+    ssoLogin$ = createEffect(() =>
+        this.actions$.pipe(
+            // Listen for the new ssoLogin action
+            ofType(AuthActions.ssoLogin),
+            mergeMap(({ token }) =>
+                // Call the service method for API 2
+                this.authService.ssoLogin(token).pipe(
+                    map((response) => {
+                        // 1. Set the token and user data in storage
+                        sessionStorage.setItem('token', response.token); // Assuming API 2 returns the final 'token'
+                        sessionStorage.setItem('user', JSON.stringify(response.user));
+
+                        console.log(response);
+
+                        // 2. Display success toast
+                        const toast: any = Swal.mixin({
+                            /* ... your Swal config ... */
+                            toast: true, position: 'top', showConfirmButton: false, timer: 3000, customClass: { container: 'toast' }
+                        });
+                        toast.fire({
+                            icon: "success",
+                            title: "تم تسجيل الدخول بنجاح ", // Updated message
+                            padding: '10px 20px',
+                        });
+
+                        // 3. Navigate away (to home/dashboard)
+                        this.router.navigate(['/']);
+
+                        // 4. Dispatch success action
+                        return AuthActions.loginSuccess({ token: response.token, user: response.user });
+                    }),
+                    catchError((error) => {
+                        // Handle API 2 failure (e.g., token invalid or expired)
+                        // Optionally show an error toast here
+                        console.error('SSO Login Failed:', error);
+                        // Navigate back to the login page on failure
+                        this.router.navigate(['/login']);
+                        return of(AuthActions.loginFailure({ error }));
+                    })
+                )
+            )
+        )
+    );
 }

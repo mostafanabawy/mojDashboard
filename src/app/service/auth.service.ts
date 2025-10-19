@@ -16,4 +16,14 @@ export class AuthService {
       map(res => res)
     );
   }
+
+  chooseLoginService(){
+    return this.http.get<any>(`https://mullet-resolved-ewe.ngrok-free.app/api/MOJUsers/ssoinfo`);
+  }
+
+  ssoLogin(token: string){
+    return this.http.get<any>(`https://mullet-resolved-ewe.ngrok-free.app/api/MOJUsers/ssologin/${token}`);
+  }
+
+  
 }

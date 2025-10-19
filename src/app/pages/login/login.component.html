@@ -66,36 +66,45 @@
                         </div> -->
                     </div>
                     <div class="w-full max-w-[440px] lg:mt-16">
-                        <div class="mb-10">
+                        <div class="mb-10" [ngClass]="{'!mb-40': !isForm}">
                             <h1 class="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-4xl">
                                 {{ 'SIGN IN' | translate}}
                             </h1>
                         </div>
-                        <form class="space-y-5 dark:text-white" [formGroup]="loginForm" (ngSubmit)="login()">
-                            <div>
-                                <label for="username">{{ 'Username' | translate }}</label>
-                                <div class="relative text-white-dark">
-                                    <input id="Email" type="email" formControlName="Email" [placeholder]="'Enter your Email' | translate"
-                                        class="form-input ps-10 placeholder:text-white-dark" />
-                                    <span class="absolute start-4 top-1/2 -translate-y-1/2">
-                                        <icon-mail [fill]="true" />
-                                    </span>
+                        <form class="space-y-5 dark:text-white" [formGroup]="isForm ? loginForm : formGroup" (ngSubmit)="login()">
+                            @if(isForm){
+                                <div>
+                                    <label for="username">{{ 'Username' | translate }}</label>
+                                    <div class="relative text-white-dark">
+                                        <input id="Email" type="email" formControlName="Email" [placeholder]="'Enter your Email' | translate"
+                                            class="form-input ps-10 placeholder:text-white-dark" />
+                                        <span class="absolute start-4 top-1/2 -translate-y-1/2">
+                                            <icon-mail [fill]="true" />
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div>
-                                <label for="PasswordHash">{{'Password' | translate}}</label>
-                                <div class="relative text-white-dark">
-                                    <input id="PasswordHash" formControlName="PasswordHash" type="password" [placeholder]="'Enter your password' | translate"
-                                        class="form-input ps-10 placeholder:text-white-dark" />
-                                    <span class="absolute start-4 top-1/2 -translate-y-1/2">
-                                        <icon-lock-dots [fill]="true" />
-                                    </span>
+                                <div>
+                                    <label for="PasswordHash">{{'Password' | translate}}</label>
+                                    <div class="relative text-white-dark">
+                                        <input id="PasswordHash" formControlName="PasswordHash" type="password" [placeholder]="'Enter your password' | translate"
+                                            class="form-input ps-10 placeholder:text-white-dark" />
+                                        <span class="absolute start-4 top-1/2 -translate-y-1/2">
+                                            <icon-lock-dots [fill]="true" />
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <button type="submit"
-                                class="btn btn-primary !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]">
-                                {{ 'SIGN IN' | translate}}
-                            </button>
+                            }
+                            @if (isForm) {
+                                <button type="submit"
+                                    class="btn btn-primary !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]">
+                                    {{ 'SIGN IN' | translate}}
+                                </button>
+                            }@else {
+                                <button type="button" (click)="loginWithMinistryAccount()"
+                                    class="btn bg-[#60583d] text-white ltr:text-base rtl:text-sm !mt-4 w-full border-0 shadow-[0_10px_20px_-10px_#60583d44]">
+                                    تسجيل الدخول بحساب الوزارة
+                                </button>
+                            }
                            <!--  <button type="submit"
                                 class="btn bg-[#60583d] text-white !mt-4 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]">
                                 {{ 'Login with Ministry Account' | translate}}

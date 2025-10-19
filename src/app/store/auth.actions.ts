@@ -17,3 +17,8 @@ export const loginFailure = createAction(
   props<{ error: string }>()
 );
 
+export const ssoLogin = createAction(
+  '[Auth] SSO Login',
+  props<{ token: string }>() // The token received in the URL query params
+);
+
