@@ -18,11 +18,11 @@ export class AuthService {
   }
 
   chooseLoginService(){
-    return this.http.get<any>(`https://mullet-resolved-ewe.ngrok-free.app/api/MOJUsers/ssoinfo`);
+    return this.http.get<any>(`${this.baseUrl}/api/MOJUsers/ssoinfo`);
   }
 
   ssoLogin(token: string){
-    return this.http.get<any>(`https://mullet-resolved-ewe.ngrok-free.app/api/MOJUsers/ssologin/${token}`);
+    return this.http.get<any>(`${this.baseUrl}/api/MOJUsers/ssologin/${token}`);
   }
 
   
